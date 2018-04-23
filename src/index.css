@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto;
+}
+
+* {
+  outline: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+.App .LogoBar{
+  height: 130px;
+}
+
+.App .LogoBar .logo {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 47px;
+  text-decoration: underline;
+  color: #EB4A42;
+  float: left;
+  margin-top: 30px;
+  margin-left: 0px;
+}
+
+.App .LogoBar .sublogo {
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 16px;
+  color: #AAAAAA;
+  float: right;
+  vertical-align: bottom;
+  margin-top: 61px;
+  margin-right: 10px;
+}
+
+.App {
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
+}
+
+.container {
+  width: 100%;
+}

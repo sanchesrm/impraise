@@ -1,0 +1,82 @@
+main form .shortenInput:not(:disabled) {
+  outline: none;
+  border: none;
+  box-shadow: none !important;
+}
+main form .shortenInput {
+  height: 40px;
+  border-radius: 3px;
+  background-color: #EAEAEA;
+  font-weight: 400;
+  font-size: 16px;
+  color: #555555;
+}
+main form .shortenInput::placeholder {
+  color: #CCCCCC;
+}
+main form .shortenButton {
+  height: 40px;
+  background-color: #EB4A42;
+  border-radius: 3px;
+}
+main form .shortenButton:disabled {
+  background-color: #E0E0E0;
+  color: #BFBFBF;
+  border: none;
+}
+main .row.clearHistoryRow {
+  margin-top: 70px;
+}
+main .row.clearHistoryRow .previously-shortened-text {
+  margin-right: 20px;
+  margin-left: 20px;
+  font-weight: 300;
+  font-size: 22px;
+}
+main .row.clearHistoryRow .clear-history-btn {
+  color: #EB4A42;
+  font-weight: 400;
+  font-size: 16px;
+}
+main .noURLToShow {
+  text-align: center;
+}
+main .table-responsive {
+  margin-right: 15px;
+  margin-top: 15px;
+}
+main .table-responsive tr > *:nth-child(2) {
+  width: 130px;
+  text-align: center;
+  vertical-align: middle;
+}
+main .table-responsive tr > *:nth-child(3) {
+  width: 130px;
+  text-align: center;
+  vertical-align: middle;
+}
+main .table-responsive .table .table-header th {
+  font-weight: 400;
+  font-size: 14px;
+  color: #AAAAAA;
+}
+main .table-responsive .table .table-body {
+  font-weight: 300;
+  font-size: 16px;
+}
+main .table-responsive .table .table-body tr {
+  cursor: pointer;
+}
+main .table-responsive .table .table-body tr > *:nth-child(1) div {
+  font-weight: 400;
+  font-size: 16px;
+}
+main .table-responsive .table .table-body tr > *:nth-child(1) div span {
+  color: #EB4A42;
+}
+main .table-responsive .table .table-body tr > *:nth-child(1) div .copyLink {
+  margin-left: 50px;
+}
+main .table-responsive .table .table-body tr > *:nth-child(1) span {
+  color: #CCCCCC;
+}

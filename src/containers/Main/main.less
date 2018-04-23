@@ -1,0 +1,112 @@
+@primary-text-color: #555555;
+@secondary-text-color: #AAAAAA;
+@unimportant-text-color: #CCCCCC;
+@disabled-button-text-color: #BFBFBF;
+@accent-color: #EB4A42;
+@light-background: #EAEAEA;
+@disabled-button-background: #E0E0E0;
+
+main {
+    form {
+        .shortenInput:not(:disabled) {
+            outline: none;
+            border: none;
+            box-shadow: none !important;
+        }
+        
+        .shortenInput {
+            height: 40px;
+            border-radius: 3px;
+            background-color: @light-background;
+            font-weight: 400;
+            font-size: 16px;
+            color: @primary-text-color;
+        }
+
+        .shortenInput::placeholder {
+            color: @unimportant-text-color;
+        }
+
+        .shortenButton {
+            height: 40px;
+            background-color: @accent-color;
+            border-radius: 3px;
+        }
+
+        .shortenButton:disabled{
+            background-color: @disabled-button-background;
+            color: @disabled-button-text-color;
+            border: none;
+        }
+    }
+
+    .row.clearHistoryRow {
+        margin-top: 70px;
+
+        .previously-shortened-text {
+            margin-right: 20px;
+            margin-left: 20px;
+            font-weight: 300;
+            font-size: 22px;
+        }
+
+        .clear-history-btn {
+            color: @accent-color;
+            font-weight: 400;
+            font-size: 16px;
+        }
+    }
+
+    .noURLToShow {
+        text-align: center;
+    }
+
+    .table-responsive {
+        margin-right: 15px;
+        margin-top: 15px;
+
+        tr > *:nth-child(2) { 
+            width:130px; 
+            text-align: center;
+            vertical-align: middle;
+        }
+        tr > *:nth-child(3) { 
+            width:130px; 
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table .table-header th {
+            font-weight: 400;
+            font-size: 14px;
+            color: @secondary-text-color;
+        }
+    
+        .table .table-body {
+            font-weight: 300;
+            font-size: 16px;
+
+            tr {
+                cursor: pointer;
+            }
+
+            tr > *:nth-child(1) { 
+                div {
+                    font-weight: 400;
+                    font-size: 16px;
+
+                    span {
+                        color: @accent-color;
+                    }
+                    .copyLink {
+                        margin-left: 50px;
+                    }
+                }
+                span {
+                    color: @unimportant-text-color;
+                }
+            }
+        }
+    }
+
+}
