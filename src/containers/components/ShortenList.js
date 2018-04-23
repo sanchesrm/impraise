@@ -24,21 +24,29 @@ class ShortenList extends Component {
     mapTable = () => {
         if (Object.keys(this.props.shortenList).length) {
             return (
-                Object.keys(this.props.shortenList).map((keyName) => (
-                    <CopyToClipboard text={ this.props.shortenList[keyName].url } key={ keyName } >
-                        <tr onMouseEnter={this.handleEnter.bind(this, keyName)} onMouseLeave={this.handleLeave.bind(this, keyName)}>
-                            <td>
-                                <div> 
-                                    shooooort.com/<span>{ keyName }</span>
-                                    { this.state.hoveredRow === keyName ? (<span className="copyLink">Click to copy this link</span>) : ''}  
-                                </div>
-                                <span>{ this.props.shortenList[keyName].url }</span>        
-                            </td>
-                            <td>{ this.props.shortenList[keyName].redirectCount }</td>
-                            <td>{ this.props.shortenList[keyName].lastSeenDate ? moment(this.props.shortenList[keyName].lastSeenDate).fromNow() : '-' }</td>
-                        </tr>
-                    </CopyToClipboard>
-                ))
+                Object.keys(this.props.shortenList).map((keyName) => {
+                    let newElement;
+                    if (this.props.shortenList[keyName].newElement) {
+                        newElement = true;
+                        delete this.props.shortenList[keyName].newElement;
+                    }
+
+                    return (
+                        <CopyToClipboard text={ `https://impraise-shorty.herokuapp.com/${keyName}` } key={ keyName } >
+                            <tr onMouseEnter={this.handleEnter.bind(this, keyName)} onMouseLeave={this.handleLeave.bind(this, keyName)} className={ `${ newElement ? 'newElementClass' : '' }` }>
+                                <td>
+                                    <div> 
+                                        shooooort.com/<span>{ keyName }</span>
+                                        { this.state.hoveredRow === keyName ? (<span className="copyLink">Click to copy this link</span>) : ''}  
+                                    </div>
+                                    <span>{ this.props.shortenList[keyName].url }</span>        
+                                </td>
+                                <td>{ this.props.shortenList[keyName].redirectCount }</td>
+                                <td>{ this.props.shortenList[keyName].lastSeenDate ? moment(this.props.shortenList[keyName].lastSeenDate).fromNow() : '-' }</td>
+                            </tr>
+                        </CopyToClipboard>
+                    )
+                })
             );
         } else {
             return (

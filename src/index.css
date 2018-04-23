@@ -5,11 +5,11 @@ body {
 }
 
 * {
-  outline: none;
+  outline: none !important;
 }
 
 *:focus {
-  outline: none;
+  outline: none !important;
 }
 
 .App .LogoBar{

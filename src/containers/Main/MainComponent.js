@@ -19,17 +19,18 @@ class MainComponent extends Component {
 
 	componentDidMount() {	
         let props = this.props;	
-        // Object.keys(props.shortenList).map((keyName) => (
-        //     props.fetchUrlShortened(keyName).then((returnedPayload) => {
-        //         console.log("test");
-        //         console.log(returnedPayload);
-        //         console.log(props.shortenList);
-                
-        //         props.shortenList[keyName].redirectCount = returnedPayload.payload.data.redirectCount;
-        //         props.shortenList[keyName].lastSeenDate = returnedPayload.payload.data.lastSeenDate;
-        //         console.log(props.shortenList);
-        //     })
-        // ));
+        let promiseArr = Object.keys(props.shortenList).map((keyName) => {
+            return props.fetchUrlShortened(keyName).then((returnedPayload) => {                
+                props.shortenList[keyName].redirectCount = returnedPayload.payload.data.redirectCount;
+                props.shortenList[keyName].lastSeenDate = returnedPayload.payload.data.lastSeenDate;
+            })
+        });
+
+        Promise.all(promiseArr).then(() => {
+            props.fetchShortenedURLS(props.shortenList);
+        }).catch(function (err) {
+            this.showError("An error occurred while fetching the URLs");
+        });
 	}
 
     clearHistory = () => {

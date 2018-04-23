@@ -1,9 +1,9 @@
-main form .shortenInput:not(:disabled) {
+main .row .shortenInput:not(:disabled) {
   outline: none;
   border: none;
   box-shadow: none !important;
 }
-main form .shortenInput {
+main .row .shortenInput {
   height: 40px;
   border-radius: 3px;
   background-color: #EAEAEA;
@@ -11,15 +11,17 @@ main form .shortenInput {
   font-size: 16px;
   color: #555555;
 }
-main form .shortenInput::placeholder {
+main .row .shortenInput::placeholder {
   color: #CCCCCC;
 }
-main form .shortenButton {
+main .row .shortenButton {
   height: 40px;
   background-color: #EB4A42;
   border-radius: 3px;
+  min-width: 150px;
+  margin-right: 10px;
 }
-main form .shortenButton:disabled {
+main .row .shortenButton:disabled {
   background-color: #E0E0E0;
   color: #BFBFBF;
   border: none;
@@ -66,6 +68,9 @@ main .table-responsive .table .table-body {
 }
 main .table-responsive .table .table-body tr {
   cursor: pointer;
+}
+main .table-responsive .table .table-body tr.newElementClass {
+  border-left: 5px solid #EB4A42;
 }
 main .table-responsive .table .table-body tr > *:nth-child(1) div {
   font-weight: 400;

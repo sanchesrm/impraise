@@ -7,7 +7,7 @@
 @disabled-button-background: #E0E0E0;
 
 main {
-    form {
+    .row {
         .shortenInput:not(:disabled) {
             outline: none;
             border: none;
@@ -31,6 +31,8 @@ main {
             height: 40px;
             background-color: @accent-color;
             border-radius: 3px;
+            min-width: 150px;
+            margin-right: 10px;
         }
 
         .shortenButton:disabled{
@@ -88,6 +90,10 @@ main {
 
             tr {
                 cursor: pointer;
+            }
+
+            tr.newElementClass {
+                border-left: 5px solid @accent-color;
             }
 
             tr > *:nth-child(1) { 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, FormControl, Col } from 'react-bootstrap';
+import { FormControl, Col, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap-button-loader';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -22,26 +22,32 @@ class SearchBar extends Component {
         let props = this.props;
         let currentThis = this;
         let url = this.state.urlToBeShortened;
+        let newShortCode = null;
         this.setState({
             urlToBeShortened: ''
-        })
+        });
         
-        props.shortUrl(url).then((returnedPayload) => {
-            let newShortCode = returnedPayload.payload.data.shortcode;
+        let promise = props.shortUrl(url).then((returnedShortUrl) => {
+            newShortCode = returnedShortUrl.payload.data.shortcode;
 
-            props.fetchUrlShortened(newShortCode).then((returnedPayload) => {
-                props.fetchShortenedURLS({ [newShortCode] : { ...returnedPayload.payload.data, url }, ...props.shortenList });
-                
-                currentThis.setState({
-                    loading: false
-                });
-            });
+            return props.fetchUrlShortened(newShortCode)
         }).catch((e) => {
             props.showError(e.data);
             currentThis.setState({
                 loading: false
             });
-        })
+        });
+
+        promise.then((returnedURLShortened) => {
+            props.fetchShortenedURLS({ [newShortCode]: { ...returnedURLShortened.payload.data, url, newElement: true }, ...props.shortenList });
+
+            currentThis.setState({
+                loading: false
+            });
+        }).catch(function (err) {
+            // props.fetchShortenedURLS(props.shortenList);
+            props.showError("An error occurred while fetching the URLs");
+        });
     }
 
     handleURLChange = (evt) => {
@@ -50,24 +56,21 @@ class SearchBar extends Component {
 
     render() {
         return(
-            <Form horizontal>
-                <FormGroup controlId="formInlineName">
-                    <Col md={10}>
-                        <FormControl type="text" placeholder="Place the link you want to shorten here" className="shortenInput" 
-                            inputRef={(ref) => {this.urlToBeShortened = ref}} onChange={ this.handleURLChange.bind(this) } value={this.state.urlToBeShortened}/>
-                    </Col>
-                    <Col md={1}>
-                        <Button bsStyle="danger" className="shortenButton" 
-                            onClick={ this.handleClickToShort.bind(this) } loading={ this.state.loading } disabled={this.state.urlToBeShortened === ''} >
-                            Shorten this link
-                        </Button>
-                    </Col>
-                </FormGroup>
-            </Form>
+            <Row>
+                <Col md={9}>
+                    <FormControl type="text" placeholder="Place the link you want to shorten here" className="shortenInput" 
+                        inputRef={(ref) => {this.urlToBeShortened = ref}} onChange={ this.handleURLChange.bind(this) } value={this.state.urlToBeShortened}/>
+                </Col>
+                <Col md={3}>
+                    <Button bsStyle="danger" className="shortenButton pull-right" 
+                        onClick={ this.handleClickToShort.bind(this) } loading={ this.state.loading } disabled={this.state.urlToBeShortened === ''} >
+                        Shorten this link
+                    </Button>
+                </Col>
+            </Row>
         )
     }
 }
-
 
 function mapStateToProps({ shortenList }) {
     return { shortenList };

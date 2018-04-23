@@ -10,10 +10,6 @@ export function ShortUrl(state = [], action) {
     case FETCH_URL_SHORTENED:
       return action.payload.data;
     case 'HANDLE_ERROR':
-    console.log("asdf");
-    console.log(action);
-    console.log(action.payload);
-    console.log(action.data);
       throw action.payload.response;
     default:
       return state
@@ -25,6 +21,6 @@ export function ShortenedURLS(state = {}, action) {
     case FETCH_SHORTENED_URLS:
       return action.payload;
     default:
-      return {};
+      return state;
   }
 }

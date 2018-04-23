@@ -8,7 +8,8 @@ import reducers from './reducers';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
-import { loadState, saveState } from './LocalStorage'
+import { loadState, saveState } from './LocalStorage';
+import throttle from 'lodash/throttle';
 
 const persistedState = loadState();
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise);
@@ -19,11 +20,11 @@ const store = createStore(
     createStoreWithMiddleware
 );
 
-store.subscribe(() => {
+store.subscribe(throttle(() => {
     saveState(
         store.getState().shortenList
     );
-});
+}, 2000));
 
 store.dispatch({
     type: 'FETCH_SHORTENED_URLS',
