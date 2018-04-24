@@ -13,12 +13,18 @@ export class MainComponent extends Component {
 
         this.state = {
             showAlert: false,
-            alertMessage: ''
+            alertMessage: '', 
+            showInfoMessage: false,
+            infoMessage: ''
         }
     }
 
 	componentDidMount() {	
         let props = this.props;	
+        this.setState({
+            showInfoMessage: true,
+            infoMessage: 'Fetching new data. Just wait a few seconds'
+        })
         let promiseArr = Object.keys(props.shortenList).map((keyName) => {
             return props.fetchUrlShortened(keyName).then((returnedPayload) => {                
                 props.shortenList[keyName].redirectCount = returnedPayload.payload.data.redirectCount;
@@ -28,7 +34,16 @@ export class MainComponent extends Component {
 
         Promise.all(promiseArr).then(() => {
             props.fetchShortenedURLS(props.shortenList);
-        }).catch(function (err) {
+
+            // This timeout is just to make sure the user can read the message before it disappears.
+            // Depending on the fastness of the call, the user couldn't read the message properly
+            setTimeout(() => {
+                this.setState({
+                    showInfoMessage: false,
+                    infoMessage: ''
+                })
+            }, 2000)
+        }).catch((err) => {
             this.showError("An error occurred while fetching the URLs");
         });
 	}
@@ -40,7 +55,9 @@ export class MainComponent extends Component {
     showError = (alertMessage) => {
         this.setState({
             showAlert: true,
-            alertMessage: alertMessage
+            alertMessage: alertMessage,
+            showInfoMessage: false,
+            infoMessage: ''
         })
 
         setTimeout(() => {
@@ -64,6 +81,12 @@ export class MainComponent extends Component {
                 { (this.state.showAlert) ?
                     <Alert bsStyle="danger">
                         { this.state.alertMessage }
+                    </Alert> : null
+                }
+
+                {(this.state.showInfoMessage) ?
+                    <Alert bsStyle="info">
+                        {this.state.infoMessage}
                     </Alert> : null
                 }
                 <ShortenList />

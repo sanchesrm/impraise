@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from "enzyme";
 import configureMockStore from "redux-mock-store";
 import { MainComponent } from './MainComponent';
-import { SearchBar } from '../components/SearchBar';
 
 const mockStore = configureMockStore();
 const store = mockStore({});
