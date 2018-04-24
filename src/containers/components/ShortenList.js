@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import moment from 'moment'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-class ShortenList extends Component {
+export class ShortenList extends Component {
     constructor(props) {
         super(props);
 

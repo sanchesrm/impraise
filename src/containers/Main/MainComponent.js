@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import SearchBar from '../components/SearchBar'
-import ShortenList from '../components/ShortenList'
+import SearchBar from '../components/SearchBar';
+import ShortenList from '../components/ShortenList';
 import { Row, Button, Alert } from 'react-bootstrap';
-import { fetchShortenedURLS, fetchUrlShortened } from '../../actions/index'
+import { fetchShortenedURLS, fetchUrlShortened } from '../../actions/index';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import './main.css'
+import './main.css';
 
-class MainComponent extends Component {
+export class MainComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -62,7 +62,7 @@ class MainComponent extends Component {
                 </Row>
 
                 { (this.state.showAlert) ?
-                    <Alert bsStyle="warning">
+                    <Alert bsStyle="danger">
                         { this.state.alertMessage }
                     </Alert> : null
                 }
